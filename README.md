@@ -19,15 +19,15 @@ Nanochat is designed to be a simple, performant, and educational implementation 
 - Optax
 
 ### Installation
-You can install the necessary dependencies via pip:
+You can initialize the `uv` environment and install dependencies using:
 ```bash
-pip install jax jaxlib flax optax
+uv sync
 ```
 
 ### Running the Training Script
-Run the following command to start a dummy training run and verify the model implementation:
+Run the following command to start a dummy training run within the `uv` environment:
 ```bash
-python train.py
+uv run train.py
 ```
 
 ## Implementation Details

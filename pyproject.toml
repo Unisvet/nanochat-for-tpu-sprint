@@ -1,0 +1,19 @@
+[project]
+name = "nanochat-for-tpu-sprint"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Svetlana Meissner", email = "post@dlearn.de" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "jax>=0.9.2",
+    "jaxlib>=0.9.2",
+    "optax>=0.2.8",
+    "flax>=0.8.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.10.9,<0.11.0"]
+build-backend = "uv_build"

@@ -61,10 +61,10 @@ class Nanochat(nnx.Module):
         self.token_embed = nnx.Embed(vocab_size, d_model, rngs=rngs)
         self.pos_embed = nnx.Variable(jnp.zeros((max_len, d_model)), name="pos_embed", type="Param") # Simple learnable pos embedding
         
-        self.blocks = [
+        self.blocks = nnx.List([
             TransformerBlock(d_model, n_heads, d_model * 4, rngs=rngs)
             for _ in range(n_layers)
-        ]
+        ])
         self.ln_f = nnx.LayerNorm(d_model, rngs=rngs)
         self.lm_head = nnx.Linear(d_model, vocab_size, use_bias=False, rngs=rngs)
         

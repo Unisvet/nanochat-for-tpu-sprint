@@ -29,12 +29,15 @@ def loss_fn(model, batch):
 
 @nnx.jit
 def train_step(model, optimizer, batch):
-    def wrap_loss_fn(model):
+    def loss_handler(model, batch):
         return loss_fn(model, batch)
-        
-    grad_fn = nnx.value_and_grad(wrap_loss_fn)
-    loss, grads = grad_fn(model)
+
+    # Use nnx.value_and_grad which handles the functional split/merge internally
+    # when decoratd with @nnx.jit or within an nnx.Context
+    grad_fn = nnx.value_and_grad(loss_handler)
+    loss, grads = grad_fn(model, batch)
     
+    # Update the optimizer (pass the gradients)
     optimizer.update(grads)
     return loss
 
@@ -51,10 +54,8 @@ def main():
         rngs=rngs,
     )
     
-    # Initialize optimizer
-    # optimizer = nnx.Optimizer(model, optax.adamw(LEARNING_RATE))
-    # Wait, nnx.Optimizer simplifies things
-    optimizer = nnx.Optimizer(model, optax.adamw(LEARNING_RATE))
+    # Initialize optimizer (AdamW)
+    optimizer = nnx.ModelAndOptimizer(model, optax.adamw(LEARNING_RATE))
     
     print("Beginning training loop...")
     

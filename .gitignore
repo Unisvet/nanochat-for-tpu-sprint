@@ -1,0 +1,25 @@
+# Generic Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# JAX/Flax
+.jax_cache/
+
+# Artifacts/Output
+error.txt
+output.txt
+*.log
+
+# Editor-specific
+.vscode/
+.idea/
+.DS_Store
+*.swp
